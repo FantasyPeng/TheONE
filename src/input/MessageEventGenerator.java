@@ -58,7 +58,8 @@ public class MessageEventGenerator implements EventQueue {
 	/** Size range of the messages (min, max) */
 	private int[] sizeRange;
 	/** Interval between messages (min, max) */
-	private int[] msgInterval;
+	//private int[] msgInterval;
+	private double[] msgInterval;
 	/** Time range for message creation (min, max) */
 	protected double[] msgTime;
 
@@ -73,7 +74,7 @@ public class MessageEventGenerator implements EventQueue {
 	 */
 	public MessageEventGenerator(Settings s){
 		this.sizeRange = s.getCsvInts(MESSAGE_SIZE_S);
-		this.msgInterval = s.getCsvInts(MESSAGE_INTERVAL_S);
+		this.msgInterval = s.getCsvDoubles(MESSAGE_INTERVAL_S);
 		this.hostRange = s.getCsvInts(HOST_RANGE_S, 2);
 		this.idPrefix = s.getSetting(MESSAGE_ID_PREFIX_S);
 
@@ -101,11 +102,12 @@ public class MessageEventGenerator implements EventQueue {
 			s.assertValidRange(this.sizeRange, MESSAGE_SIZE_S);
 		}
 		if (this.msgInterval.length == 1) {
-			this.msgInterval = new int[] {this.msgInterval[0],
+			this.msgInterval = new double[] {this.msgInterval[0],
 					this.msgInterval[0]};
 		}
 		else {
-			s.assertValidRange(this.msgInterval, MESSAGE_INTERVAL_S);
+			//s.assertValidRange(this.msgInterval, MESSAGE_INTERVAL_S);
+			s.assertValidRangeDouble(this.msgInterval, MESSAGE_INTERVAL_S);
 		}
 		s.assertValidRange(this.hostRange, HOST_RANGE_S);
 
@@ -125,10 +127,14 @@ public class MessageEventGenerator implements EventQueue {
 		}
 
 		/* calculate the first event's time */
-		this.nextEventsTime = (this.msgTime != null ? this.msgTime[0] : 0)
+		/*this.nextEventsTime = (this.msgTime != null ? this.msgTime[0] : 0)
 			+ msgInterval[0] +
 			(msgInterval[0] == msgInterval[1] ? 0 :
-			rng.nextInt(msgInterval[1] - msgInterval[0]));
+			rng.nextInt(msgInterval[1] - msgInterval[0]));*/
+		this.nextEventsTime = (this.msgTime != null ? this.msgTime[0] : 0)
+				+ msgInterval[0] +
+				(msgInterval[0] == msgInterval[1] ? 0 :
+				rng.nextDouble() * (msgInterval[1] - msgInterval[0]));
 	}
 
 
@@ -158,9 +164,13 @@ public class MessageEventGenerator implements EventQueue {
 	 * Generates a (random) time difference between two events
 	 * @return the time difference
 	 */
-	protected int drawNextEventTimeDiff() {
-		int timeDiff = msgInterval[0] == msgInterval[1] ? 0 :
+	protected double drawNextEventTimeDiff() {
+/*		int timeDiff = msgInterval[0] == msgInterval[1] ? 0 :
 			rng.nextInt(msgInterval[1] - msgInterval[0]);
+			
+		return msgInterval[0] + timeDiff;*/
+		double timeDiff = msgInterval[0] == msgInterval[1] ? 0 :
+			(rng.nextDouble() * (msgInterval[1] - msgInterval[0])) ;
 		return msgInterval[0] + timeDiff;
 	}
 
@@ -188,7 +198,7 @@ public class MessageEventGenerator implements EventQueue {
 	public ExternalEvent nextEvent() {
 		int responseSize = 0; /* zero stands for one way messages */
 		int msgSize;
-		int interval;
+		double interval;
 		int from;
 		int to;
 

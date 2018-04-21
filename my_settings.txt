@@ -5,9 +5,9 @@
 ## Scenario settings
 Scenario.name = default_scenario
 Scenario.simulateConnections = true
-Scenario.updateInterval = 0.1
+Scenario.updateInterval = 0.01
 # 43200s == 12h
-Scenario.endTime = 43200
+Scenario.endTime = 100
 
 ## Interface-specific settings:
 # type : which interface class the interface belongs to
@@ -175,9 +175,9 @@ Events.nrof = 1
 Events1.class = MessageBurstGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds)
-Events1.interval = 0,3
+Events1.interval = 0.2
 # Message sizes (6kB - 8kB)
-Events1.size = 6.5k,7.5k
+Events1.size = 1.4k
 # range of message source/destination addresses
 Events1.hosts = 1,10
 Events1.tohosts = 0,0
@@ -202,7 +202,7 @@ MapBasedMovement.mapFile1 = data/map1.wkt
 ## Reports - all report names have to be valid report classes
 
 # how many reports to load
-Report.nrofReports = 2
+Report.nrofReports = 4
 # length of the warm up period (simulated seconds)
 Report.warmup = 0
 # default directory of reports (can be overridden per Report with output setting)
@@ -210,7 +210,8 @@ Report.reportDir = reports/
 # Report classes to load
 Report.report1 = MessageStatsReport
 Report.report2 = ContactTimesReport
-
+Report.report3 = CreatedMessagesReport
+Report.report4 = DeliveredMessagesReport
 ## Default settings for some routers settings
 ProphetRouter.secondsInTimeUnit = 30
 SprayAndWaitRouter.nrofCopies = 6

@@ -8,6 +8,7 @@ package core;
  * Wall clock for checking the simulation time.
  */
 public class SimClock {
+
 	private static double clockTime = 0.0;
 	private static SimClock clock = null;
 
