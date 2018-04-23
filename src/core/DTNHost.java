@@ -345,6 +345,12 @@ public class DTNHost implements Comparable<DTNHost> {
 		}
 		this.router.update();
 	}
+	
+	//更新接收端信息
+	public void updateReceive() {
+		
+		this.router.updateReceive();
+	}
 
 	/**
 	 * Tears down all connections for this host.

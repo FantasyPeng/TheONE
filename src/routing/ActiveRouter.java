@@ -43,6 +43,9 @@ public abstract class ActiveRouter extends MessageRouter {
 	public static int TTL_CHECK_INTERVAL = 60;
 	/** connection(s) that are currently used for sending */
 	protected ArrayList<Connection> sendingConnections;
+	
+
+
 	/** sim time when the last TTL check was done */
 	private double lastTtlCheck;
 
@@ -67,7 +70,14 @@ public abstract class ActiveRouter extends MessageRouter {
 			this.energy = null; /* no energy model */
 		}
 	}
-
+	@Override
+	public ArrayList<Connection> getSendingConnections() {
+		return sendingConnections;
+	}
+	@Override
+	public void setSendingConnections(ArrayList<Connection> sendingConnections) {
+		this.sendingConnections = sendingConnections;
+	}
 	/**
 	 * Copy constructor.
 	 * @param r The router prototype where setting values are copied from
@@ -449,7 +459,7 @@ public abstract class ActiveRouter extends MessageRouter {
 	 */
 	protected Connection tryAllMessagesToAllConnections(){
 		List<Connection> connections = getConnections();
-		if (connections.size() == 0 || this.getNrofMessages() == 0) {
+ 		if (connections.size() == 0 || this.getNrofMessages() == 0) {
 			return null;
 		}
 
@@ -580,7 +590,32 @@ public abstract class ActiveRouter extends MessageRouter {
 	@Override
 	public void update() {
 		super.update();
-
+		List<Connection> connections = getConnections();
+		
+		for (int j=0, n=connections.size(); j<n; j++) {
+			Connection con2 = connections.get(j);
+			if (!con2.isReadyForTransfer() && this.sendingConnections.size() == 0) {
+								// a connection isn't ready for new transfer
+				ArrayList<Connection> sendingConnections1 = con2.getOtherNode(this.getHost())
+						.getRouter().getSendingConnections();
+				
+				for (int i=0; i<sendingConnections1.size(); i++) {
+					Connection con1 = sendingConnections1.get(i);
+					if (con1.getOtherNode(con2.getOtherNode(this.getHost())).equals(this.getHost())) {
+						if (con2.isMessageTransferred()) {
+							if (con2.getMessage() != null) {
+								transferDone(con2);
+								con2.finalizeTransfer();
+							}  
+							sendingConnections1.remove(i);
+							con2.getOtherNode(this.getHost())
+									.getRouter().setSendingConnections(sendingConnections1);
+						}
+					}
+				}
+				
+			}
+		}
 		/* in theory we can have multiple sending connections even though
 		  currently all routers allow only one concurrent sending connection */
 		for (int i=0; i<this.sendingConnections.size(); ) {

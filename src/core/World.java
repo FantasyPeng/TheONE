@@ -191,6 +191,13 @@ public class World {
 				"Nrof hosts has changed unexpectedly";
 			Random rng = new Random(SimClock.getIntTime());
 			Collections.shuffle(this.updateOrder, rng);
+			//首先更新接收信息的节点，使其信道不被占用
+		/*	for (int i=0, n = hosts.size();i < n; i++) {
+				if (this.isCancelled) {
+					break;
+				}
+				this.updateOrder.get(i).updateReceive();
+			}*/
 			for (int i=0, n = hosts.size();i < n; i++) {
 				if (this.isCancelled) {
 					break;

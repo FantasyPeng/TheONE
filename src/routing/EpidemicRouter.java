@@ -30,11 +30,15 @@ public class EpidemicRouter extends ActiveRouter {
 		super(r);
 		//TODO: copy epidemic settings here (if any)
 	}
-
+	
+	public void updateReceive() {
+		super.update();
+	}
+	
 	@Override
 	public void update() {
 		super.update();
-		if (isTransferring() || !canStartTransfer()) {
+		if (isTransferring() || !canStartTransfer()) {		
 			return; // transferring, don't try other connections yet
 		}
 

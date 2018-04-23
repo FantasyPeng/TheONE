@@ -4,6 +4,7 @@
  */
 package routing;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -102,7 +103,7 @@ public abstract class MessageRouter {
 
 	/** applications attached to the host */
 	private HashMap<String, Collection<Application>> applications = null;
-
+	
 	/**
 	 * Constructor. Creates a new message router based on the settings in
 	 * the given Settings object. Size of the message buffer is read from
@@ -670,5 +671,20 @@ public abstract class MessageRouter {
 		return getClass().getSimpleName() + " of " +
 			this.getHost().toString() + " with " + getNrofMessages()
 			+ " messages";
+	}
+
+	public void updateReceive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<Connection> getSendingConnections() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setSendingConnections(ArrayList<Connection> sendingConnections) {
+		// TODO Auto-generated method stub
+		
 	}
 }

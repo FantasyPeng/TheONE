@@ -4,6 +4,8 @@
  */
 package core;
 
+import java.util.ArrayList;
+
 import routing.MessageRouter;
 
 /**
@@ -30,7 +32,6 @@ public class CBRConnection extends Connection {
 		this.transferDoneTime = 0;
 
 	}
-
 	/**
 	 * Sets a message that this connection is currently transferring. If message
 	 * passing is controlled by external events, this method is not needed
