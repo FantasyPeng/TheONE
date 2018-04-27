@@ -5,9 +5,9 @@
 ## Scenario settings
 Scenario.name = default_scenario
 Scenario.simulateConnections = true
-Scenario.updateInterval = 0.01
+Scenario.updateInterval = 0.001
 # 43200s == 12h
-Scenario.endTime = 1000
+Scenario.endTime = 480
 
 ## Message creation parameters
 # How many event generators
@@ -18,7 +18,7 @@ Events1.class = MessageBurstGenerator
 # Creation interval in seconds (one new message every 25 to 35 seconds)
 Events1.interval = 1
 # Message sizes (6kB - 8kB)
-Events1.size = 7k
+Events1.size = 1.4k
 # range of message source/destination addresses
 Events1.hosts = 1,10
 Events1.tohosts = 0,0

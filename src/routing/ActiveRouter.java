@@ -590,8 +590,8 @@ public abstract class ActiveRouter extends MessageRouter {
 	@Override
 	public void update() {
 		super.update();
+		/*发送端也可以触发消息的接收事件*/
 		List<Connection> connections = getConnections();
-		
 		for (int j=0, n=connections.size(); j<n; j++) {
 			Connection con2 = connections.get(j);
 			if (!con2.isReadyForTransfer() && this.sendingConnections.size() == 0) {

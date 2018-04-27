@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import core.Connection;
 import core.DTNHost;
@@ -154,7 +156,17 @@ public class MotionDrivenRouter extends ActiveRouter {
 		tryMotionDriven();
 	//	this.tryAllMessagesToAllConnections();
 	}
-	
+	/**
+	 * 传输完成之后drop掉刚发送的消息，保证single-copy
+	 * @param con The connection whose transfer was finalized
+	 */
+	@Override
+	protected void transferDone(Connection con) {
+		Message m = con.getMessage();
+		String id = m.getId();
+		DTNHost from = con.getMsgFrom();
+		from.deleteMessage(id,true);
+	}
 	@Override
 	public MotionDrivenRouter replicate() {
 		// TODO Auto-generated method stub

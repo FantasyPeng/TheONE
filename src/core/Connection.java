@@ -163,7 +163,13 @@ public abstract class Connection {
 	public Message getMessage() {
 		return this.msgOnFly;
 	}
-
+	
+	/**
+	 * 获取消息发送方节点
+	 */
+	public DTNHost getMsgFrom() {
+		return this.msgFromNode;
+	}
 	/**
 	 * Gets the current connection speed
 	 */
