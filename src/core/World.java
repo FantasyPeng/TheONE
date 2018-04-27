@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import util.Vertex;
+import util.Graph;
+
 /**
  * World contains all the nodes and is responsible for updating their
  * location and connections.
@@ -45,7 +48,7 @@ public class World {
 	private double nextQueueEventTime;
 	private EventQueue nextEventQueue;
 	/** list of nodes; nodes are indexed by their network address */
-	private List<DTNHost> hosts;
+	public static List<DTNHost> hosts;
 	private boolean simulateConnections;
 	/** nodes in the order they should be updated (if the order should be
 	 * randomized; null value means that the order should not be randomized) */
@@ -57,13 +60,14 @@ public class World {
 	private ScheduledUpdatesQueue scheduledUpdates;
 	private boolean simulateConOnce;
 
+	public static Graph graph;
 	/**
 	 * Constructor.
 	 */
 	public World(List<DTNHost> hosts, int sizeX, int sizeY,
 			double updateInterval, List<UpdateListener> updateListeners,
 			boolean simulateConnections, List<EventQueue> eventQueues) {
-		this.hosts = hosts;
+		World.hosts = hosts;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.updateInterval = updateInterval;
@@ -93,7 +97,7 @@ public class World {
 
 		if(randomizeUpdates) {
 			// creates the update order array that can be shuffled
-			this.updateOrder = new ArrayList<DTNHost>(this.hosts);
+			this.updateOrder = new ArrayList<DTNHost>(World.hosts);
 		}
 		else { // null pointer means "don't randomize"
 			this.updateOrder = null;
@@ -163,15 +167,47 @@ public class World {
 
 		moveHosts(this.updateInterval);
 		simClock.setTime(runUntil);
-
+		updateGraph();
 		updateHosts();
 
 		/* inform all update listeners */
 		for (UpdateListener ul : this.updateListeners) {
-			ul.updated(this.hosts);
+			ul.updated(World.hosts);
 		}
 	}
-
+	/**
+	 * 更新图的邻接表，为后续最短路径算法铺垫
+	 */
+	private void updateGraph() {
+		graph = new Graph();
+		for (int i=0, n = hosts.size();i < n; i++) {
+			List<Vertex> vertex = new ArrayList<Vertex>(); 	               
+			String id = hosts.get(i).toString();	
+			for (int j = 0; j < n; j++) {
+				if (hosts.get(i).canConnect(hosts.get(j))) {
+					String otherid = hosts.get(j).toString();
+					double weight = getReallinksWeight(hosts.get(i),hosts.get(j));
+					vertex.add(new Vertex(otherid,weight));
+				}
+			}
+			graph.addVertex(id, vertex);
+		}			
+	}
+	/**
+	 * 获取真实存在的链接，即实链接边的权值
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	private double getReallinksWeight(DTNHost from,DTNHost to) {
+		
+		double dis = from.getLocation().distance(to.getLocation());
+		double sij = 1000000 * (-9.09 * (Math.log(dis) / Math.log(2)) + 72.58);   //根据论文中公式，单位为bit/s
+		double weight = 7000 * 8 / sij;                                           //7KB = 7000 * 8Kbit
+				
+		return weight;
+	}
+	
 	/**
 	 * Updates all hosts (calls update for every one of them). If update
 	 * order randomizing is on (updateOrder array is defined), the calls
@@ -185,25 +221,36 @@ public class World {
 				}
 				hosts.get(i).update(simulateConnections);
 			}
-		}
-		else { // update order randomizing is on
-			assert this.updateOrder.size() == this.hosts.size() :
-				"Nrof hosts has changed unexpectedly";
-			Random rng = new Random(SimClock.getIntTime());
-			Collections.shuffle(this.updateOrder, rng);
-			//首先更新接收信息的节点，使其信道不被占用
-		/*	for (int i=0, n = hosts.size();i < n; i++) {
+/*			for (int i=0, n = hosts.size();i < n; i++) {
 				if (this.isCancelled) {
 					break;
 				}
-				this.updateOrder.get(i).updateReceive();
+				hosts.get(i).updateRouter();
 			}*/
+		}
+		else { // update order randomizing is on
+			assert this.updateOrder.size() == World.hosts.size() :
+				"Nrof hosts has changed unexpectedly";
+			Random rng = new Random(SimClock.getIntTime());
+			Collections.shuffle(this.updateOrder, rng);
+			/*
+			 * 将更新网络层与路由协议拆分开，先更新所有节点的网络层，包括建立连接，断开连接等，再更新全图拓扑
+			 * 最后更新路由协议
+			 */
 			for (int i=0, n = hosts.size();i < n; i++) {
 				if (this.isCancelled) {
 					break;
 				}
 				this.updateOrder.get(i).update(simulateConnections);
 			}
+			
+			/*for (int i=0, n = hosts.size();i < n; i++) {
+				if (this.isCancelled) {
+					break;
+				}
+				this.updateOrder.get(i).updateRouter();
+			}*/
+			
 		}
 
 		if (simulateConOnce && simulateConnections) {
@@ -233,8 +280,8 @@ public class World {
 	 * Returns the hosts in a list
 	 * @return the hosts in a list
 	 */
-	public List<DTNHost> getHosts() {
-		return this.hosts;
+	public static List<DTNHost> getHosts() {
+		return World.hosts;
 	}
 
 	/**
@@ -264,7 +311,7 @@ public class World {
 					"range of 0-" + (hosts.size()-1) + " is valid");
 		}
 
-		DTNHost node = this.hosts.get(address);
+		DTNHost node = World.hosts.get(address);
 		assert node.getAddress() == address : "Node indexing failed. " +
 			"Node " + node + " in index " + address;
 

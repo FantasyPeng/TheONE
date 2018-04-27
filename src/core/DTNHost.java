@@ -29,6 +29,14 @@ public class DTNHost implements Comparable<DTNHost> {
 	private MovementModel movement;
 	private Path path;
 	private double speed;
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
 	private double nextTimeToMove;
 	private String name;
 	private List<MessageListener> msgListeners;
@@ -114,6 +122,21 @@ public class DTNHost implements Comparable<DTNHost> {
 	public boolean isMovementActive() {
 		return this.movement.isActive();
 	}
+	/**
+	 * 返回两个节点是否能够连通
+	 */
+	public boolean canConnect(DTNHost de) {
+		
+		NetworkInterface ni = getInterface(1);
+		NetworkInterface nt = de.getInterface(1);
+		if (ni.isCanConnect(nt)) {
+			return true;
+		}
+		else
+			return false;
+	}
+	
+
 
 	/**
 	 * Returns true if this node's radio is active (false if not)
@@ -182,7 +205,7 @@ public class DTNHost implements Comparable<DTNHost> {
 		for (NetworkInterface i : net) {
 			lc.addAll(i.getConnections());
 		}
-
+		
 		return lc;
 	}
 
@@ -328,7 +351,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	}
 
 	/**
-	 * Updates node's network layer and router.
+	 * Updates node's network layer .
 	 * @param simulateConnections Should network layer be updated too
 	 */
 	public void update(boolean simulateConnections) {
@@ -343,7 +366,16 @@ public class DTNHost implements Comparable<DTNHost> {
 				i.update();
 			}
 		}
+		
+		this.router.update();		
+	}
+	/**
+	 *  更新路由
+	 */
+	public void updateRouter() {
+		
 		this.router.update();
+		
 	}
 	
 	//更新接收端信息

@@ -7,7 +7,7 @@ Scenario.name = default_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.01
 # 43200s == 12h
-Scenario.endTime = 480
+Scenario.endTime = 1000
 
 ## Message creation parameters
 # How many event generators
@@ -16,9 +16,9 @@ Events.nrof = 1
 Events1.class = MessageBurstGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds)
-Events1.interval = 0.5
+Events1.interval = 1
 # Message sizes (6kB - 8kB)
-Events1.size = 3.5k
+Events1.size = 7k
 # range of message source/destination addresses
 Events1.hosts = 1,10
 Events1.tohosts = 0,0
@@ -42,10 +42,11 @@ btInterface.type = SimpleBroadcastInterface
 btInterface.transmitSpeed = 10M
 btInterface.transmitRange = 200
 
+
 # High speed, long range, interface for group 4
 highspeedInterface.type = SimpleBroadcastInterface
 highspeedInterface.transmitSpeed = 10M
-highspeedInterface.transmitRange = 1000
+highspeedInterface.transmitRange = 400
 
 # Define 6 different node groups
 Scenario.nrofHostGroups = 14
@@ -72,8 +73,9 @@ Scenario.nrofHostGroups = 14
 
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
-Group.router = EpidemicRouter
-Group.bufferSize = 500M
+Group.router = MotionDrivenRouter
+
+Group.bufferSize = 5000M
 
 
 Group.routeType = 1
@@ -85,7 +87,7 @@ Group.nrofHosts = 1
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
 # Walking speeds
-Group.speed = 4, 5
+Group.speed = 4.5,4.5
 # Message TTL of 300 minutes (5 hours)
 Group.msgTtl = 300
 

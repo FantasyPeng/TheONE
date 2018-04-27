@@ -363,7 +363,18 @@ abstract public class NetworkInterface implements ModuleCommunicationListener {
 		return this.host.getLocation().distance(
 				anotherInterface.getHost().getLocation()) <= smallerRange;
 	}
-
+	/**
+	 * 返回两个接口是否可以连接
+	 */
+	protected boolean isCanConnect(NetworkInterface anotherInterface) {
+		if (isScanning()
+				&& anotherInterface.getHost().isRadioActive()
+				&& isWithinRange(anotherInterface)
+				&& (this != anotherInterface)) {
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * Returns true if the given NetworkInterface is connected to this host.
 	 * @param netinterface The other NetworkInterface to check
