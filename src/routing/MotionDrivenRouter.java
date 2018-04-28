@@ -2,12 +2,9 @@ package routing;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import core.Connection;
 import core.DTNHost;
@@ -22,9 +19,6 @@ public class MotionDrivenRouter extends ActiveRouter {
 	private Map<String,Double> mpreal;         //拓扑表，存储到每个节点的权值以及路径
 	private Map<String,Double> mpvirtual; 
 	private Map<String,List<String>> paths; 
-	private List<String> shortpath;        //存储到目标节点的最短路径
-	
-	
 	public MotionDrivenRouter(Settings s) {
 		super(s);
 		//TODO: read&use epidemic router specific settings (if any)

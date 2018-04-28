@@ -6,8 +6,8 @@
 Scenario.name = default_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.001
-# 43200s == 12h
-Scenario.endTime = 480
+
+Scenario.endTime = 100
 
 ## Message creation parameters
 # How many event generators
@@ -16,7 +16,7 @@ Events.nrof = 1
 Events1.class = MessageBurstGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds)
-Events1.interval = 1
+Events1.interval = 0.2
 # Message sizes (6kB - 8kB)
 Events1.size = 1.4k
 # range of message source/destination addresses
@@ -37,9 +37,10 @@ Events1.prefix = M
 # transmitRange : range of the interface (meters)
 
 # "Bluetooth" interface for all nodes
+#btInterface.type = DependDistanceInterface
 btInterface.type = SimpleBroadcastInterface
 # Transmit speed of 2 Mbps = 250kBps
-btInterface.transmitSpeed = 10M
+btInterface.transmitSpeed = 2M
 btInterface.transmitRange = 200
 
 

@@ -74,8 +74,10 @@ public class VBRConnection extends Connection {
 		if (othspeed < currentspeed) {
 			currentspeed = othspeed;
 		}
-
-
+		
+/*		if (isTransferring()) {
+			msgsent += currentspeed * (now - this.lastUpdate);
+		}*/
 		msgsent += currentspeed * (now - this.lastUpdate);
 		this.lastUpdate = now;
 	}
