@@ -5,6 +5,7 @@
 package movement;
 
 import input.ExternalPathMovementReader;
+import movement.map.MapNode;
 
 import java.util.List;
 
@@ -158,5 +159,11 @@ public class ExternalPathMovement extends MovementModel {
 			return this.paths.get(this.curPath).get(0).time;
 		else
 			return Double.MAX_VALUE;
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -7,7 +7,7 @@ Scenario.name = default_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.001
 
-Scenario.endTime = 100
+Scenario.endTime = 435
 
 ## Message creation parameters
 # How many event generators
@@ -40,16 +40,12 @@ Events1.prefix = M
 #btInterface.type = DependDistanceInterface
 btInterface.type = SimpleBroadcastInterface
 # Transmit speed of 2 Mbps = 250kBps
-btInterface.transmitSpeed = 2M
+btInterface.transmitSpeed = 5M
 btInterface.transmitRange = 200
 
 
-# High speed, long range, interface for group 4
-highspeedInterface.type = SimpleBroadcastInterface
-highspeedInterface.transmitSpeed = 10M
-highspeedInterface.transmitRange = 400
 
-# Define 6 different node groups
+# Define 14 different node groups
 Scenario.nrofHostGroups = 14
 
 ## Group-specific settings:
@@ -74,8 +70,8 @@ Scenario.nrofHostGroups = 14
 
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
-Group.router = MotionDrivenRouter
-
+Group.router = DTNCloseRouter
+#Group.router = MotionDrivenRouter
 Group.bufferSize = 5000M
 
 
@@ -89,6 +85,7 @@ Group.nrofInterfaces = 1
 Group.interface1 = btInterface
 # Walking speeds
 Group.speed = 4.5,4.5
+
 # Message TTL of 300 minutes (5 hours)
 Group.msgTtl = 300
 
@@ -221,6 +218,7 @@ Report.report1 = MessageStatsReport
 Report.report2 = ContactTimesReport
 Report.report3 = CreatedMessagesReport
 Report.report4 = DeliveredMessagesReport
+
 ## Default settings for some routers settings
 ProphetRouter.secondsInTimeUnit = 30
 SprayAndWaitRouter.nrofCopies = 6

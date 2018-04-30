@@ -121,7 +121,16 @@ public class MapRouteMovement extends MapBasedMovement implements
 
 		return p;
 	}
-
+	/**
+	 * 获取下一站节点
+	 */
+	@Override
+	public MapNode getNextStop() {
+		
+		MapNode to = route.getNextStop();
+	
+		return to;
+	}
 	/**
 	 * Returns the first stop on the route
 	 */

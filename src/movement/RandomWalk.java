@@ -6,6 +6,7 @@ package movement;
 
 import core.Coord;
 import core.Settings;
+import movement.map.MapNode;
 
 /**
  * Random Walk movement model
@@ -91,5 +92,11 @@ public class RandomWalk extends MovementModel implements SwitchableMovement {
 
 	public boolean isReady() {
 		return true;
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

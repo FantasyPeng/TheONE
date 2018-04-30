@@ -155,7 +155,7 @@ public class World {
 		double runUntil = SimClock.getTime() + this.updateInterval;
 
 		setNextEventQueue();
-
+		
 		/* process all events that are due until next interval update */
 		while (this.nextQueueEventTime <= runUntil) {
 			simClock.setTime(this.nextQueueEventTime);

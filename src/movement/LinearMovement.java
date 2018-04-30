@@ -8,6 +8,7 @@ import core.Coord;
 import core.Settings;
 import movement.MovementModel;
 import movement.Path;
+import movement.map.MapNode;
 
 /**
  * Movement model where all nodes move on a line
@@ -175,6 +176,12 @@ public class LinearMovement extends MovementModel {
 	@Override
 	public LinearMovement replicate() {
 		return new LinearMovement(this);
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

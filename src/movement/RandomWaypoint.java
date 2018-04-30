@@ -6,6 +6,7 @@ package movement;
 
 import core.Coord;
 import core.Settings;
+import movement.map.MapNode;
 
 /**
  * Random waypoint movement model. Creates zig-zag paths within the
@@ -61,5 +62,11 @@ public class RandomWaypoint extends MovementModel {
 	protected Coord randomCoord() {
 		return new Coord(rng.nextDouble() * getMaxX(),
 				rng.nextDouble() * getMaxY());
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

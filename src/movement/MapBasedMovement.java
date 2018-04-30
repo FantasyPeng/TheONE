@@ -429,4 +429,10 @@ public class MapBasedMovement extends MovementModel implements SwitchableMovemen
 		return true;
 	}
 
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

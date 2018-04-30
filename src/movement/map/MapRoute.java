@@ -101,7 +101,14 @@ public class MapRoute {
 
 		return next;
 	}
-
+	/**
+	 * 获取下一个站点
+	 */
+	public MapNode getNextStop() {
+		MapNode next = stops.get(index);
+		
+		return next;
+	}
 	/**
 	 * Returns a new route with the same settings
 	 * @return a replicate of this route

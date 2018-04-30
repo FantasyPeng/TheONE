@@ -7,6 +7,7 @@ package movement;
 import core.Coord;
 import core.Settings;
 import core.SimScenario;
+import movement.map.MapNode;
 
 /**
  * Location (movement) model that sets the nodes in a grid formation
@@ -102,6 +103,12 @@ public class GridLocation extends MovementModel {
 	@Override
 	public GridLocation replicate() {
 		return new GridLocation(this);
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -15,6 +15,7 @@ import core.ModuleCommunicationBus;
 import core.Settings;
 import core.SimClock;
 import core.SimError;
+import movement.map.MapNode;
 
 /**
  * <P>Superclass for all movement models. All subclasses must contain at least a
@@ -202,7 +203,14 @@ public abstract class MovementModel {
 	 * @return A new path or null
 	 */
 	public abstract Path getPath();
-
+	
+	/**
+	 * 获取下一站
+	 */
+	public  MapNode getNextStop() 
+	{
+		return null;
+	}
 	/**
 	 * Returns a new initial placement for a node
 	 * @return The initial coordinates for a node

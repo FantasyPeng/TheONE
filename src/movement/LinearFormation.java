@@ -8,6 +8,7 @@ import core.Coord;
 import core.Settings;
 import movement.MovementModel;
 import movement.Path;
+import movement.map.MapNode;
 
 /**
  * A stationary "movement" model where nodes do not move but are in linear
@@ -111,6 +112,12 @@ public class LinearFormation extends MovementModel {
 	@Override
 	public LinearFormation replicate() {
 		return new LinearFormation(this);
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

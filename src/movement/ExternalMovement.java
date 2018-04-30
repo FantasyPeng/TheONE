@@ -5,6 +5,7 @@
 package movement;
 
 import input.ExternalMovementReader;
+import movement.map.MapNode;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -272,6 +273,12 @@ public class ExternalMovement extends MovementModel {
 	 */
 	public static void reset() {
 		idMapping = null;
+	}
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

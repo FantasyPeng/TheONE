@@ -2,6 +2,7 @@ package movement;
 
 import core.Coord;
 import core.Settings;
+import movement.map.MapNode;
 
 /**
  * <p>
@@ -216,4 +217,10 @@ extends MovementModel {
                ( t[ 1 ] > 0 );
     }
     //========================================================================//
+
+	@Override
+	public MapNode getNextStop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

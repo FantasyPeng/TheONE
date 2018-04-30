@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import movement.MapRouteMovement;
 import movement.MovementModel;
 import movement.Path;
+import movement.map.MapNode;
 import routing.MessageRouter;
 import routing.util.RoutingInfo;
 
@@ -404,7 +406,35 @@ public class DTNHost implements Comparable<DTNHost> {
 			}
 		}
 	}
-
+	
+	/**
+	 * 预测时间F之后节点的坐标，根据当前节点的速度、方向和位置
+	 */
+	public Coord getLocation_F(double timeIncrement) {
+		double possibleMovement;
+		double distance;
+		double dx, dy;
+		double x,y;
+		Coord destin = this.destination;
+		if (this.destination == null) {
+			return this.location;
+		}
+		if (this.location.equals(destin)) {
+			destin = getNextWaypoint_F();
+		}
+		possibleMovement = timeIncrement * speed;
+		distance = this.location.distance(destin);
+		
+		dx = (possibleMovement/distance) * (destin.getX() -
+				this.location.getX());
+		dy = (possibleMovement/distance) * (destin.getY() -
+				this.location.getY());
+		x = this.location.getX() + dx;
+		y = this.location.getY() + dy;
+		
+		return new Coord(x,y);
+	}
+	
 	/**
 	 * Moves the node towards the next waypoint or waits if it is
 	 * not time to move yet
@@ -444,7 +474,21 @@ public class DTNHost implements Comparable<DTNHost> {
 				this.location.getY());
 		this.location.translate(dx, dy);
 	}
-
+	/**
+	 * 为预测函数获取下一个位点
+	 */
+	private Coord getNextWaypoint_F() {
+		Path p = path;
+		MapNode mn = null;
+		if (p == null) {
+			mn = movement.getNextStop();
+		} else {
+			System.out.println("ERROR IN DTNHOST485");
+		}
+		
+		return mn.getLocation();
+	}
+	
 	/**
 	 * Sets the next destination and speed to correspond the next waypoint
 	 * on the path.
