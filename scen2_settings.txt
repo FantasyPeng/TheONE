@@ -70,9 +70,8 @@ Scenario.nrofHostGroups = 14
 
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
-#Group.router = DTNCloseRouter
+Group.router = DTNCloseRouter
 #Group.router = MotionDrivenRouter
-Group.router = DTNLoadRouter
 Group.bufferSize = 5000M
 
 
@@ -209,7 +208,7 @@ MapBasedMovement.mapFile1 = data/map1.wkt
 ## Reports - all report names have to be valid report classes
 
 # how many reports to load
-Report.nrofReports = 9
+Report.nrofReports = 8
 # length of the warm up period (simulated seconds)
 Report.warmup = 0
 # default directory of reports (can be overridden per Report with output setting)
@@ -223,7 +222,7 @@ Report.report5 = EventLogReport
 Report.report6 = MessageDelayReport
 Report.report7 = MessageDeliveryReport
 Report.report8 = DeliveredMessagesReport
-Report.report9 = BufferOccupancyReport
+
 ## Default settings for some routers settings
 ProphetRouter.secondsInTimeUnit = 30
 SprayAndWaitRouter.nrofCopies = 6
