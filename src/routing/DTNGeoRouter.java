@@ -14,12 +14,12 @@ import core.World;
 import util.Graph;
 import util.Tuple;
 
-public class MotionDrivenRouter extends ActiveRouter {
+public class DTNGeoRouter extends ActiveRouter {
 	
 	private Map<String,Double> mpreal;         //拓扑表，存储到每个节点的权值以及路径
 	private Map<String,Double> mpvirtual; 
 	private Map<String,List<String>> paths; 
-	public MotionDrivenRouter(Settings s) {
+	public DTNGeoRouter(Settings s) {
 		super(s);
 		//TODO: read&use epidemic router specific settings (if any)
 	}
@@ -27,7 +27,7 @@ public class MotionDrivenRouter extends ActiveRouter {
 	 * Copy constructor.
 	 * @param r The router prototype where setting values are copied from
 	 */
-	protected MotionDrivenRouter(MotionDrivenRouter r) {
+	protected DTNGeoRouter(DTNGeoRouter r) {
 		super(r);
 		//TODO: copy epidemic settings here (if any)
 	}
@@ -110,7 +110,7 @@ public class MotionDrivenRouter extends ActiveRouter {
  		
  		for (Connection con : connections) { 
  			DTNHost other = con.getOtherNode(getHost());
-			MotionDrivenRouter othRouter = (MotionDrivenRouter)other.getRouter();
+			DTNGeoRouter othRouter = (DTNGeoRouter)other.getRouter();
 			
 			if (othRouter.isTransferring()) {
 				continue; // skip hosts that are transferring
@@ -162,9 +162,9 @@ public class MotionDrivenRouter extends ActiveRouter {
 		from.deleteMessage(id,true);
 	}
 	@Override
-	public MotionDrivenRouter replicate() {
+	public DTNGeoRouter replicate() {
 		// TODO Auto-generated method stub
-		return new MotionDrivenRouter(this);
+		return new DTNGeoRouter(this);
 	}
 	
 }
