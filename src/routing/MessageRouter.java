@@ -83,7 +83,7 @@ public abstract class MessageRouter {
 	/** Receive return value for unspecified reason */
 	public static final int DENIED_UNSPECIFIED = -99;
 
-	private List<MessageListener> mListeners;
+	public List<MessageListener> mListeners;
 	/** The messages being transferred with msgID_hostName keys */
 	private HashMap<String, Message> incomingMessages;
 	/** The messages this router is carrying */
@@ -408,7 +408,22 @@ public abstract class MessageRouter {
 	protected void putToIncomingBuffer(Message m, DTNHost from) {
 		this.incomingMessages.put(m.getId() + "_" + from.toString(), m);
 	}
-
+	
+	
+	/**
+	 * 根据id值删除键值对
+	 * @return 
+	 */
+	public Message removeFromIncomingBufferById(String id) {
+		
+		for(String keys : this.incomingMessages.keySet()) {
+			if (keys.contains(id)) {
+				return this.incomingMessages.remove(keys);
+			}
+		}
+		return null;	
+	}
+	
 	/**
 	 * Removes and returns a message with a certain ID from the incoming
 	 * messages buffer or null if such message wasn't found.
@@ -416,7 +431,7 @@ public abstract class MessageRouter {
 	 * @param from The host that sent this message (previous hop)
 	 * @return The found message or null if such message wasn't found
 	 */
-	protected Message removeFromIncomingBuffer(String id, DTNHost from) {
+	public Message removeFromIncomingBuffer(String id, DTNHost from) {
 		return this.incomingMessages.remove(id + "_" + from.toString());
 	}
 
@@ -452,7 +467,7 @@ public abstract class MessageRouter {
 	 * @param id Identifier of the message to remove
 	 * @return The removed message or null if message for the ID wasn't found
 	 */
-	protected Message removeFromMessages(String id) {
+	public Message removeFromMessages(String id) {
 		Message m = this.messages.remove(id);
 		return m;
 	}

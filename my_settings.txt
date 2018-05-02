@@ -16,9 +16,9 @@ Events.nrof = 1
 Events1.class = MessageBurstGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds)
-Events1.interval = 1
+Events1.interval = 0.2
 # Message sizes (6kB - 8kB)
-Events1.size = 7k
+Events1.size = 1.4k
 # range of message source/destination addresses
 Events1.hosts = 1,10
 Events1.tohosts = 0,0
@@ -71,11 +71,12 @@ Scenario.nrofHostGroups = 14
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
 #Group.router = DTNCloseRouter
-Group.router = DTNGeoRouter
+#Group.router = DTNGeoRouter
 #Group.router = DTNLoadRouter
+Group.router = DTNGeoRouter_FinalDrop
 Group.bufferSize = 5000M
 
-
+#Group.deleteDelivered = 1
 Group.routeType = 1
 Group.waitTime = 0, 0
 Group.nrofHosts = 1
@@ -165,7 +166,7 @@ Group11.groupID = f
 
 Group11.movementModel = MapRouteMovement
 Group11.routeFile = data/ferry1.wkt
-Group11.routeFirstStop = 1
+Group11.routeFirstStop = 0
 
 # uav4
 Group12.groupID = f
@@ -186,7 +187,7 @@ Group14.groupID = f
 
 Group14.movementModel = MapRouteMovement
 Group14.routeFile = data/ferry4.wkt
-Group14.routeFirstStop = 0
+Group14.routeFirstStop = 2
 
 
 

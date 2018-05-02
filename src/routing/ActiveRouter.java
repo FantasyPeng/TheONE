@@ -22,6 +22,8 @@ import core.MessageListener;
 import core.NetworkInterface;
 import core.Settings;
 import core.SimClock;
+import core.SimError;
+import core.World;
 
 /**
  * Superclass of active routers. Contains convenience methods (e.g.

@@ -7,6 +7,7 @@ package core;
 import input.EventQueue;
 import input.ExternalEvent;
 import input.ScheduledUpdatesQueue;
+import routing.MessageRouter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -317,7 +318,29 @@ public class World {
 
 		return node;
 	}
+	/**
+	 * 删除全网络的消息副本
+	 */
+	public static void deleteMessageFromAll(String id,DTNHost to) {
+		for (int i=0,n = hosts.size(); i<n; i++) {
 
+			DTNHost host = hosts.get(i);
+			if (host.equals(to)) {
+				continue;
+			}
+			MessageRouter mr = host.getRouter();
+			Message removed = mr.removeFromMessages(id);
+			Message rem = mr.removeFromIncomingBufferById(id);
+		/*	if (removed == null) throw new SimError("no message for id " +
+					id + " to remove at " + host);*/
+			if (removed == null) 
+				continue;
+			
+			for (MessageListener ml : mr.mListeners) {
+				ml.messageDeleted(removed,host, false);
+			}
+		}
+	}
 	/**
 	 * Schedules an update request to all nodes to happen at the specified
 	 * simulation time.
