@@ -397,7 +397,29 @@ public abstract class Report {
 		Collections.sort(values);
 		return values.get(values.size()/2);
 	}
-
+	/**
+	 * 返回一组数据和
+	 */
+	public double getDoubleSum(List<Double> values) {
+		if (values.size() == 0) {
+			return 0;
+		}
+		double sum = 0.0;
+		for (double dValue : values) {
+			sum += dValue;
+		} 
+		return sum;
+	}
+	public double getIntSum(List<Integer> values) {
+		if (values.size() == 0) {
+			return 0;
+		}
+		int sum = 0;
+		for (int dValue : values) {
+			sum += dValue;
+		} 
+		return sum;
+	}
 	/**
 	 * Returns the variance of the values in the List.
 	 *

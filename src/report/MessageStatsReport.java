@@ -165,8 +165,10 @@ public class MessageStatsReport extends Report implements MessageListener {
 			"\ndelivery_prob: " + format(deliveryProb) +
 			"\nresponse_prob: " + format(responseProb) +
 			"\noverhead_ratio: " + format(overHead) +
+			"\nlatency_all: " + getDoubleSum(this.latencies) +
 			"\nlatency_avg: " + getAverage(this.latencies) +
 			"\nlatency_med: " + getMedian(this.latencies) +
+			"\nhopcount_all: " + getIntSum(this.hopCounts) +
 			"\nhopcount_avg: " + getIntAverage(this.hopCounts) +
 			"\nhopcount_med: " + getIntMedian(this.hopCounts) +
 			"\nbuffertime_avg: " + getAverage(this.msgBufferTime) +

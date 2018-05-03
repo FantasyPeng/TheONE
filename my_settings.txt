@@ -7,7 +7,7 @@ Scenario.name = default_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.001
 
-Scenario.endTime = 435
+Scenario.endTime = 435.2
 
 ## Message creation parameters
 # How many event generators
@@ -73,7 +73,8 @@ Group.movementModel = MapRouteMovement
 #Group.router = DTNCloseRouter
 #Group.router = DTNGeoRouter
 #Group.router = DTNLoadRouter
-Group.router = DTNGeoRouter_FinalDrop
+#Group.router = DTNGeoRouter_FinalDrop
+Group.router = DTNCloseAllRouter
 Group.bufferSize = 5000M
 
 #Group.deleteDelivered = 1
