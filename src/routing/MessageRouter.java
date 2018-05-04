@@ -418,7 +418,7 @@ public abstract class MessageRouter {
 		
 		for(String keys : this.incomingMessages.keySet()) {
 			if (keys.contains(id)) {
-				return this.incomingMessages.remove(keys);
+				this.incomingMessages.remove(keys);
 			}
 		}
 		return null;	

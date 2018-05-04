@@ -50,8 +50,8 @@ public class EpidemicRouter extends ActiveRouter {
 		// then try any/all message to any/all connection
 		this.tryAllMessagesToAllConnections();
 	}
-
-
+	
+	
 	@Override
 	public EpidemicRouter replicate() {
 		return new EpidemicRouter(this);

@@ -330,15 +330,43 @@ public class World {
 			}
 			MessageRouter mr = host.getRouter();
 			Message removed = mr.removeFromMessages(id);
-			Message rem = mr.removeFromIncomingBufferById(id);
 		/*	if (removed == null) throw new SimError("no message for id " +
 					id + " to remove at " + host);*/
 			if (removed == null) 
-				continue;
-			
+				continue;		
 			for (MessageListener ml : mr.mListeners) {
 				ml.messageDeleted(removed,host, false);
 			}
+		}
+	}
+	public static void deleteIncomingMessageFromAll(String id,DTNHost tf,DTNHost current) {
+		for (int i=0,n = hosts.size(); i<n; i++) {
+			DTNHost host = hosts.get(i);
+			if (host.equals(tf) || host.equals(current)) {
+				continue;
+			}
+			MessageRouter mr = host.getRouter();
+			ArrayList<Connection> sendingConnections = mr.getSendingConnections();
+			for(int j = 0; j < sendingConnections.size(); j++) {
+				Connection con = sendingConnections.get(j);
+				if (con.getMessage().getId() == id) {
+					con.msgFromNode = null;
+					con.msgOnFly = null;
+					sendingConnections.remove(con);
+					mr.setSendingConnections(sendingConnections);
+					DTNHost other = con.getOtherNode(host);
+					Message removed = other.getRouter().removeFromIncomingBuffer(id, host);
+					if (removed == null) 
+						throw new SimError("no Incomingmessage for id " +
+								id + " to remove at " + other);				
+					for (MessageListener ml : mr.mListeners) {
+						ml.messageDeleted(removed,other, false);
+					}
+				}
+			}
+		/*	if (removed == null) throw new SimError("no message for id " +
+					id + " to remove at " + host);*/
+
 		}
 	}
 	/**

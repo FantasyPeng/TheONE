@@ -164,8 +164,10 @@ public class DTNGeoRouter_FinalDrop extends ActiveRouter {
 	protected void transferDone(Connection con) {
 		Message m = con.getMessage();
 		String id = m.getId();
-		if (m.getTo() == con.getOtherNode(getHost()) || m.getTo() == getHost())
+		if (m.getTo() == con.getOtherNode(getHost()) || m.getTo() == getHost()) {
 			World.deleteMessageFromAll(id,m.getTo());
+			World.deleteIncomingMessageFromAll(id,con.getOtherNode(getHost()),getHost());
+		}
 	}
 	@Override
 	public DTNGeoRouter_FinalDrop replicate() {

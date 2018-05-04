@@ -74,7 +74,7 @@ public abstract class ActiveRouter extends MessageRouter {
 	}
 	@Override
 	public ArrayList<Connection> getSendingConnections() {
-		return sendingConnections;
+		return this.sendingConnections;
 	}
 	@Override
 	public void setSendingConnections(ArrayList<Connection> sendingConnections) {
@@ -592,7 +592,7 @@ public abstract class ActiveRouter extends MessageRouter {
 	@Override
 	public void update() {
 		super.update();
-		/*发送端也可以触发消息的接收事件*/
+		/*接收端也可以触发消息的接收事件*/
 		List<Connection> connections = getConnections();
 		for (int j=0, n=connections.size(); j<n; j++) {
 			Connection con2 = connections.get(j);
