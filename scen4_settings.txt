@@ -1,0 +1,263 @@
+#
+# Default settings for the simulation
+#
+
+## Scenario settings
+Scenario.name = scen3_scenario
+Scenario.simulateConnections = true
+Scenario.updateInterval = 0.001
+
+Scenario.endTime = 437
+
+## Message creation parameters
+# How many event generators
+Events.nrof = 1
+# Class of the first event generator
+Events1.class = MessageBurstGenerator
+# (following settings are specific for the MessageEventGenerator class)
+# Creation interval in seconds (one new message every 25 to 35 seconds)
+Events1.interval = 0.2
+# Message sizes (6kB - 8kB)
+Events1.size = 1.4k
+# range of message source/destination addresses
+Events1.hosts = 1,17
+Events1.tohosts = 0,0
+# Message ID prefix
+Events1.prefix = M
+#Events1.time = 0, 80
+
+
+
+
+# "Bluetooth" interface for all nodes
+#btInterface.type = DependDistanceInterface
+btInterface.type = SimpleBroadcastInterface
+# Transmit speed of 2 Mbps = 250kBps
+btInterface.transmitSpeed = 2M
+btInterface.transmitRange = 200
+
+
+
+# Define 14 different node groups
+Scenario.nrofHostGroups = 17
+
+# Common settings for all groups
+Group.movementModel = MapRouteMovement
+#Group.router = DTNCloseRouter
+Group.router = DTNGeoRouter
+#Group.router = DTNLoadRouter
+#Group.router = DTNGeoRouter_FinalDrop
+#Group.router = DTNCloseAllRouter
+Group.bufferSize = 5000M
+
+#Group.deleteDelivered = 1
+Group.routeType = 1
+Group.groupID = u
+Group.waitTime = 0, 0
+Group.nrofHosts = 1
+Group.movementModel = MapRouteMovement
+
+# All nodes have the bluetooth interface
+Group.nrofInterfaces = 1
+Group.interface1 = btInterface
+# Walking speeds
+Group.speed = 15,15
+
+# Message TTL of 300 minutes (5 hours)
+Group.msgTtl = 300
+
+
+
+# Ground specific settings
+Group1.groupID = g
+Group1.nrofHosts = 1
+Group1.movementModel = StationaryMovement
+Group1.nodeLocation = 600,550
+
+# uav2
+Group2.groupID = u
+
+Group2.movementModel = MapRouteMovement
+Group2.routeFile = data/Scen4/uav1.wkt
+
+
+
+# uav3
+Group3.groupID = u
+
+Group3.movementModel = MapRouteMovement
+Group3.routeFile = data/Scen4/uav2.wkt
+
+# uav4
+Group4.groupID = u
+
+Group4.movementModel = MapRouteMovement
+Group4.routeFile = data/Scen4/uav3.wkt
+
+
+# uav
+Group5.groupID = u
+
+Group5.movementModel = MapRouteMovement
+Group5.routeFile = data/Scen4/uav4.wkt
+
+
+# uav
+Group6.groupID = u
+
+Group6.movementModel = MapRouteMovement
+Group6.routeFile = data/Scen4/uav5.wkt
+
+# uav
+Group7.groupID = u
+
+Group7.movementModel = MapRouteMovement
+Group7.routeFile = data/Scen4/uav6.wkt
+
+# uav4
+Group8.groupID = u
+
+Group8.movementModel = MapRouteMovement
+Group8.routeFile = data/Scen4/uav7.wkt
+
+
+# uav4
+Group9.groupID = u
+
+Group9.movementModel = MapRouteMovement
+Group9.routeFile = data/Scen4/uav8.wkt
+
+
+
+# uav4
+Group10.groupID = u
+
+Group10.movementModel = MapRouteMovement
+Group10.routeFile = data/Scen4/uav9.wkt
+
+
+# uav4
+Group11.groupID = u
+
+Group11.movementModel = MapRouteMovement
+Group11.routeFile = data/Scen4/uav10.wkt
+
+Group12.groupID = u
+Group12.movementModel = MapRouteMovement
+Group12.routeFile = data/Scen4/uav11.wkt
+
+Group13.groupID = u
+Group13.movementModel = MapRouteMovement
+Group13.routeFile = data/Scen4/uav12.wkt
+
+# ferry
+Group14.groupID = f
+
+Group14.movementModel = MapRouteMovement
+Group14.routeFile = data/Scen4/ferry1.wkt
+Group14.routeFirstStop = 1
+# ferry
+Group15.groupID = f
+
+Group15.movementModel = MapRouteMovement
+Group15.routeFile = data/Scen4/ferry2.wkt
+Group15.routeFirstStop = 2
+# ferry
+Group16.groupID = f
+
+Group16.movementModel = MapRouteMovement
+Group16.routeFile = data/Scen4/ferry3.wkt
+Group16.routeFirstStop = 2
+
+# ferry
+Group17.groupID = f
+
+Group17.movementModel = MapRouteMovement
+Group17.routeFile = data/Scen4/ferry4.wkt
+Group17.routeFirstStop = 1
+
+Group18.groupID = u
+Group18.movementModel = MapRouteMovement
+Group18.routeFile = data/Scen4/uav13.wkt
+
+Group19.groupID = u
+Group19.movementModel = MapRouteMovement
+Group19.routeFile = data/Scen4/uav14.wkt
+
+Group20.groupID = u
+Group20.movementModel = MapRouteMovement
+Group20.routeFile = data/Scen4/uav15.wkt
+
+Group21.groupID = u
+Group21.movementModel = MapRouteMovement
+Group21.routeFile = data/Scen4/uav16.wkt
+
+
+Group22.routeFile = data/Scen4/uav17.wkt
+
+
+Group23.routeFile = data/Scen4/uav18.wkt
+
+
+Group24.routeFile = data/Scen4/uav19.wkt
+
+Group25.routeFile = data/Scen4/uav20.wkt
+
+## Movement model settings
+# seed for movement models' pseudo random number generator (default = 0)
+MovementModel.rngSeed = 1
+# World's size for Movement Models without implicit size (width, height; meters)
+MovementModel.worldSize = 1200, 1200
+# How long time to move hosts in the world before real simulation
+MovementModel.warmup = 0
+
+## Map based movement -movement model specific settings
+MapBasedMovement.nrofMapFiles = 1
+
+MapBasedMovement.mapFile1 = data/Scen4/map4.wkt
+
+
+## Reports - all report names have to be valid report classes
+
+# how many reports to load
+Report.nrofReports = 9
+# length of the warm up period (simulated seconds)
+Report.warmup = 0
+# default directory of reports (can be overridden per Report with output setting)
+Report.reportDir = reports/
+# Report classes to load
+Report.report1 = MessageStatsReport
+Report.report2 = ContactTimesReport
+Report.report3 = CreatedMessagesReport
+Report.report4 = DistanceDelayReport
+Report.report5 = EventLogReport
+Report.report6 = MessageDelayReport
+Report.report7 = MessageDeliveryReport
+Report.report8 = DeliveredMessagesReport
+Report.report9 = BufferOccupancyReport
+## Default settings for some routers settings
+ProphetRouter.secondsInTimeUnit = 30
+SprayAndWaitRouter.nrofCopies = 6
+SprayAndWaitRouter.binaryMode = true
+
+## Optimization settings -- these affect the speed of the simulation
+## see World class for details.
+Optimization.cellSizeMult = 6
+Optimization.randomizeUpdateOrder = true
+
+
+## GUI settings
+
+# GUI underlay image settings
+GUI.UnderlayImage.fileName = data/helsinki_underlay.png
+# Image offset in pixels (x, y)
+GUI.UnderlayImage.offset = 64, 20
+# Scaling factor for the image
+GUI.UnderlayImage.scale = 4.75
+# Image rotation (radians)
+GUI.UnderlayImage.rotate = -0.015
+
+# how many events to show in the log panel (default = 30)
+GUI.EventLogPanel.nrofEvents = 100
+# Regular Expression log filter (see Pattern-class from the Java API for RE-matching details)
+#GUI.EventLogPanel.REfilter = .*p[1-9]<->p[1-9]$
