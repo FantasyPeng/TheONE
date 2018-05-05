@@ -20,7 +20,7 @@ Events1.interval = 0.2
 # Message sizes (6kB - 8kB)
 Events1.size = 1.4k
 # range of message source/destination addresses
-Events1.hosts = 1,17
+Events1.hosts = 1,25
 Events1.tohosts = 0,0
 # Message ID prefix
 Events1.prefix = M
@@ -39,15 +39,15 @@ btInterface.transmitRange = 200
 
 
 # Define 14 different node groups
-Scenario.nrofHostGroups = 17
+Scenario.nrofHostGroups = 25
 
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
 #Group.router = DTNCloseRouter
-Group.router = DTNGeoRouter
+#Group.router = DTNGeoRouter
 #Group.router = DTNLoadRouter
 #Group.router = DTNGeoRouter_FinalDrop
-#Group.router = DTNCloseAllRouter
+Group.router = DTNCloseAllRouter
 Group.bufferSize = 5000M
 
 #Group.deleteDelivered = 1
@@ -61,7 +61,7 @@ Group.movementModel = MapRouteMovement
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
 # Walking speeds
-Group.speed = 15,15
+Group.speed = 4.5,4.5
 
 # Message TTL of 300 minutes (5 hours)
 Group.msgTtl = 300
