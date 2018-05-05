@@ -3,7 +3,7 @@
 #
 
 ## Scenario settings
-Scenario.name = default_scenario
+Scenario.name = scen3_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.001
 
@@ -20,7 +20,7 @@ Events1.interval = 0.2
 # Message sizes (6kB - 8kB)
 Events1.size = 1.4k
 # range of message source/destination addresses
-Events1.hosts = 1,17
+Events1.hosts = 1,25
 Events1.tohosts = 0,0
 # Message ID prefix
 Events1.prefix = M
@@ -39,22 +39,23 @@ btInterface.transmitRange = 200
 
 
 # Define 14 different node groups
-Scenario.nrofHostGroups = 17
+Scenario.nrofHostGroups = 25
 
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
 #Group.router = DTNCloseRouter
-Group.router = DTNGeoRouter
+#Group.router = DTNGeoRouter
 #Group.router = DTNLoadRouter
-#Group.router = DTNGeoRouter_FinalDrop
+Group.router = DTNGeoRouter_FinalDrop
 #Group.router = DTNCloseAllRouter
 Group.bufferSize = 5000M
 
 #Group.deleteDelivered = 1
 Group.routeType = 1
+Group.groupID = u
 Group.waitTime = 0, 0
 Group.nrofHosts = 1
-
+Group.movementModel = MapRouteMovement
 
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
@@ -175,6 +176,32 @@ Group17.movementModel = MapRouteMovement
 Group17.routeFile = data/Scen3/ferry4.wkt
 Group17.routeFirstStop = 0
 
+Group18.groupID = u
+Group18.movementModel = MapRouteMovement
+Group18.routeFile = data/Scen3/uav13.wkt
+
+Group19.groupID = u
+Group19.movementModel = MapRouteMovement
+Group19.routeFile = data/Scen3/uav14.wkt
+
+Group20.groupID = u
+Group20.movementModel = MapRouteMovement
+Group20.routeFile = data/Scen3/uav15.wkt
+
+Group21.groupID = u
+Group21.movementModel = MapRouteMovement
+Group21.routeFile = data/Scen3/uav16.wkt
+
+
+Group22.routeFile = data/Scen3/uav17.wkt
+
+
+Group23.routeFile = data/Scen3/uav18.wkt
+
+
+Group24.routeFile = data/Scen3/uav19.wkt
+
+Group25.routeFile = data/Scen3/uav20.wkt
 
 ## Movement model settings
 # seed for movement models' pseudo random number generator (default = 0)
