@@ -7,7 +7,7 @@ Scenario.name = default_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.001
 
-Scenario.endTime = 480
+Scenario.endTime = 437
 
 ## Message creation parameters
 # How many event generators
@@ -20,7 +20,7 @@ Events1.interval = 0.2
 # Message sizes (6kB - 8kB)
 Events1.size = 1.4k
 # range of message source/destination addresses
-Events1.hosts = 1,14
+Events1.hosts = 1,17
 Events1.tohosts = 0,0
 # Message ID prefix
 Events1.prefix = M
@@ -29,16 +29,9 @@ Events1.prefix = M
 
 
 
-## Interface-specific settings:
-# type : which interface class the interface belongs to
-# For different types, the sub-parameters are interface-specific
-# For SimpleBroadcastInterface, the parameters are:
-# transmitSpeed : transmit speed of the interface (bytes per second)
-# transmitRange : range of the interface (meters)
-
 # "Bluetooth" interface for all nodes
-btInterface.type = DependDistanceInterface
-#btInterface.type = SimpleBroadcastInterface
+#btInterface.type = DependDistanceInterface
+btInterface.type = SimpleBroadcastInterface
 # Transmit speed of 2 Mbps = 250kBps
 btInterface.transmitSpeed = 2M
 btInterface.transmitRange = 200
@@ -46,36 +39,15 @@ btInterface.transmitRange = 200
 
 
 # Define 14 different node groups
-Scenario.nrofHostGroups = 14
-
-## Group-specific settings:
-# groupID : Group's identifier. Used as the prefix of host names
-# nrofHosts: number of hosts in the group
-# movementModel: movement model of the hosts (valid class name from movement package)
-# waitTime: minimum and maximum wait times (seconds) after reaching destination
-# speed: minimum and maximum speeds (m/s) when moving on a path
-# bufferSize: size of the message buffer (bytes)
-# router: router used to route messages (valid class name from routing package)
-# activeTimes: Time intervals when the nodes in the group are active (start1, end1, start2, end2, ...)
-# msgTtl : TTL (minutes) of the messages created by this host group, default=infinite
-
-## Group and movement model specific settings
-# pois: Points Of Interest indexes and probabilities (poiIndex1, poiProb1, poiIndex2, poiProb2, ... )
-#       for ShortestPathMapBasedMovement
-# okMaps : which map nodes are OK for the group (map file indexes), default=all
-#          for all MapBasedMovent models
-# routeFile: route's file path - for MapRouteMovement
-# routeType: route's type - for MapRouteMovement
-
+Scenario.nrofHostGroups = 17
 
 # Common settings for all groups
 Group.movementModel = MapRouteMovement
 #Group.router = DTNCloseRouter
-#Group.router = DTNGeoRouter
+Group.router = DTNGeoRouter
 #Group.router = DTNLoadRouter
 #Group.router = DTNGeoRouter_FinalDrop
-Group.router = DTNCloseAllRouter
-#Group.router = EpidemicRouter
+#Group.router = DTNCloseAllRouter
 Group.bufferSize = 5000M
 
 #Group.deleteDelivered = 1
@@ -99,13 +71,13 @@ Group.msgTtl = 300
 Group1.groupID = g
 Group1.nrofHosts = 1
 Group1.movementModel = StationaryMovement
-Group1.nodeLocation = 400,800
+Group1.nodeLocation = 600,550
 
 # uav2
 Group2.groupID = u
 
 Group2.movementModel = MapRouteMovement
-Group2.routeFile = data/uav1.wkt
+Group2.routeFile = data/Scen3/uav1.wkt
 
 
 
@@ -113,46 +85,46 @@ Group2.routeFile = data/uav1.wkt
 Group3.groupID = u
 
 Group3.movementModel = MapRouteMovement
-Group3.routeFile = data/uav2.wkt
+Group3.routeFile = data/Scen3/uav2.wkt
 
 # uav4
 Group4.groupID = u
 
 Group4.movementModel = MapRouteMovement
-Group4.routeFile = data/uav3.wkt
+Group4.routeFile = data/Scen3/uav3.wkt
 
 
 # uav
 Group5.groupID = u
 
 Group5.movementModel = MapRouteMovement
-Group5.routeFile = data/uav4.wkt
+Group5.routeFile = data/Scen3/uav4.wkt
 
 
 # uav
 Group6.groupID = u
 
 Group6.movementModel = MapRouteMovement
-Group6.routeFile = data/uav5.wkt
+Group6.routeFile = data/Scen3/uav5.wkt
 
 # uav
 Group7.groupID = u
 
 Group7.movementModel = MapRouteMovement
-Group7.routeFile = data/uav6.wkt
+Group7.routeFile = data/Scen3/uav6.wkt
 
 # uav4
 Group8.groupID = u
 
 Group8.movementModel = MapRouteMovement
-Group8.routeFile = data/uav7.wkt
+Group8.routeFile = data/Scen3/uav7.wkt
 
 
 # uav4
 Group9.groupID = u
 
 Group9.movementModel = MapRouteMovement
-Group9.routeFile = data/uav8.wkt
+Group9.routeFile = data/Scen3/uav8.wkt
 
 
 
@@ -160,53 +132,62 @@ Group9.routeFile = data/uav8.wkt
 Group10.groupID = u
 
 Group10.movementModel = MapRouteMovement
-Group10.routeFile = data/uav9.wkt
+Group10.routeFile = data/Scen3/uav9.wkt
 
 
 # uav4
-Group11.groupID = f
+Group11.groupID = u
 
 Group11.movementModel = MapRouteMovement
-Group11.routeFile = data/ferry1.wkt
-Group11.routeFirstStop = 0
+Group11.routeFile = data/Scen3/uav10.wkt
 
-# uav4
-Group12.groupID = f
-
+Group12.groupID = u
 Group12.movementModel = MapRouteMovement
-Group12.routeFile = data/ferry2.wkt
-Group12.routeFirstStop = 1
+Group12.routeFile = data/Scen3/uav11.wkt
 
-# uav4
-Group13.groupID = f
-
+Group13.groupID = u
 Group13.movementModel = MapRouteMovement
-Group13.routeFile = data/ferry3.wkt
-Group13.routeFirstStop = 0
+Group13.routeFile = data/Scen3/uav12.wkt
 
-# uav4
+# ferry
 Group14.groupID = f
 
 Group14.movementModel = MapRouteMovement
-Group14.routeFile = data/ferry4.wkt
-Group14.routeFirstStop = 2
+Group14.routeFile = data/Scen3/ferry1.wkt
+Group14.routeFirstStop = 0
+# ferry
+Group15.groupID = f
 
+Group15.movementModel = MapRouteMovement
+Group15.routeFile = data/Scen3/ferry2.wkt
+Group15.routeFirstStop = 2
+# ferry
+Group16.groupID = f
 
+Group16.movementModel = MapRouteMovement
+Group16.routeFile = data/Scen3/ferry3.wkt
+Group16.routeFirstStop = 2
 
+# ferry
+Group17.groupID = f
+
+Group17.movementModel = MapRouteMovement
+Group17.routeFile = data/Scen3/ferry4.wkt
+Group17.routeFirstStop = 0
 
 
 ## Movement model settings
 # seed for movement models' pseudo random number generator (default = 0)
 MovementModel.rngSeed = 1
 # World's size for Movement Models without implicit size (width, height; meters)
-MovementModel.worldSize = 800, 800
+MovementModel.worldSize = 1200, 1200
 # How long time to move hosts in the world before real simulation
 MovementModel.warmup = 0
 
 ## Map based movement -movement model specific settings
 MapBasedMovement.nrofMapFiles = 1
 
-MapBasedMovement.mapFile1 = data/map1.wkt
+MapBasedMovement.mapFile1 = data/Scen3/map3.wkt
 
 
 ## Reports - all report names have to be valid report classes

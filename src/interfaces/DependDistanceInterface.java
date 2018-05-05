@@ -89,7 +89,7 @@ public class DependDistanceInterface extends NetworkInterface {
 			return 0;
 		}
 
-		speed = 1000000  * (-9.09 * (Math.log(distance) / Math.log(2)) + 72.58);
+		speed = 1000000 / 8  * (-9.09 * (Math.log(distance) / Math.log(2)) + 72.58);
 	
 
 		return (int)speed;
