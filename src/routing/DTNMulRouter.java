@@ -20,12 +20,12 @@ import util.Tuple;
  *
  */
 
-public class DTNGeoRouter_FinalDrop extends ActiveRouter {
+public class DTNMulRouter extends ActiveRouter {
 	
 	private Map<String,Double> mpreal;         //拓扑表，存储到每个节点的权值以及路径
 	private Map<String,Double> mpvirtual; 
 	private Map<String,List<String>> paths; 
-	public DTNGeoRouter_FinalDrop(Settings s) {
+	public DTNMulRouter(Settings s) {
 		super(s);
 		//TODO: read&use epidemic router specific settings (if any)
 	}
@@ -33,7 +33,7 @@ public class DTNGeoRouter_FinalDrop extends ActiveRouter {
 	 * Copy constructor.
 	 * @param r The router prototype where setting values are copied from
 	 */
-	protected DTNGeoRouter_FinalDrop(DTNGeoRouter_FinalDrop r) {
+	protected DTNMulRouter(DTNMulRouter r) {
 		super(r);
 		//TODO: copy epidemic settings here (if any)
 	}
@@ -116,7 +116,7 @@ public class DTNGeoRouter_FinalDrop extends ActiveRouter {
  		
  		for (Connection con : connections) { 
  			DTNHost other = con.getOtherNode(getHost());
-			DTNGeoRouter_FinalDrop othRouter = (DTNGeoRouter_FinalDrop)other.getRouter();
+			DTNMulRouter othRouter = (DTNMulRouter)other.getRouter();
 			
 			if (othRouter.isTransferring()) {
 				continue; // skip hosts that are transferring
@@ -170,9 +170,9 @@ public class DTNGeoRouter_FinalDrop extends ActiveRouter {
 		}
 	}
 	@Override
-	public DTNGeoRouter_FinalDrop replicate() {
+	public DTNMulRouter replicate() {
 		// TODO Auto-generated method stub
-		return new DTNGeoRouter_FinalDrop(this);
+		return new DTNMulRouter(this);
 	}
 	
 }

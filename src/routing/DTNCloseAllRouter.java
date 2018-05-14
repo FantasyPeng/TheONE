@@ -20,7 +20,7 @@ public class DTNCloseAllRouter extends ActiveRouter {
 	private Map<String,Double> mpvirtual; 
 	private Map<String,List<String>> paths; 
 	
-	private Double frame = 4.0;  //预测时间段
+	private Double frame = 8.0;  //预测时间段
 	
 	
 	public DTNCloseAllRouter(Settings s) {

@@ -45,9 +45,9 @@ Scenario.nrofHostGroups = 25
 Group.movementModel = MapRouteMovement
 #Group.router = DTNCloseRouter
 #Group.router = DTNGeoRouter
-#Group.router = DTNLoadRouter
+Group.router = DTNLoadRouter
 #Group.router = DTNGeoRouter_FinalDrop
-Group.router = DTNCloseAllRouter
+#Group.router = DTNCloseAllRouter
 Group.bufferSize = 5000M
 
 #Group.deleteDelivered = 1
